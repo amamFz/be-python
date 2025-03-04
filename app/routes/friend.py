@@ -1,10 +1,12 @@
-from app import app, db
-from flask import request, jsonify
-from models import Friend
+from flask import Blueprint, request, jsonify
+from app.models import Friend
+from app import db  # ⬅ Tetap import seperti ini, tapi pastikan models tidak error
+
+friend_routes = Blueprint("friends", __name__)
 
 
 # Dapatkan semua data teman
-@app.route("/api/friends", methods=["GET"])
+@friend_routes.route("/", methods=["GET"])
 def get_friends():
     friends = Friend.query.all()
     if not friends:
@@ -21,7 +23,7 @@ def get_friends():
 
 
 # Menambahkan data teman
-@app.route("/api/friends", methods=["POST"])
+@friend_routes.route("/", methods=["POST"])
 def add_friend():
     try:
         data = request.json
@@ -64,7 +66,7 @@ def add_friend():
 
 
 # Menghapus data teman
-@app.route("/api/friends/<int:id>", methods=["DELETE"])
+@friend_routes.route("/<int:id>", methods=["DELETE"])
 def delete_friend(id):
     try:
         friend = Friend.query.get(id)
@@ -82,7 +84,7 @@ def delete_friend(id):
 
 
 # Mengupdate data teman
-@app.route("/api/friends/<int:id>", methods=["PUT"])
+@friend_routes.route("/<int:id>", methods=["PUT"])
 def update_friend(id):
     try:
         friend = Friend.query.get(id)

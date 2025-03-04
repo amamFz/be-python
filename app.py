@@ -1,19 +1,6 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
+from app import create_app  # Ambil fungsi create_app dari __init__.py
 
-app = Flask(__name__)
-CORS(app)
-
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///friends.db"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-db = SQLAlchemy(app)
-
-import routes
-
-with app.app_context():
-    db.create_all()
+app = create_app()  # Buat instance Flask menggunakan create_app()
 
 if __name__ == "__main__":
     app.run(debug=True)
