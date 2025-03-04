@@ -19,6 +19,7 @@ pip-selfcheck.json
 
 # Database
 friends.db
+sehatica.db
 
 # Compiled Python files
 *.pyc
