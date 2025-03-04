@@ -8,6 +8,6 @@ class Config:
     JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "jwtsecretkey")  # Secret key untuk JWT
     JWT_BLOCKLIST_ENABLED = True
     JWT_BLOCKLIST_TOKEN_CHECKS = ["access"]
-    JWT_ACCESS_TOKEN_EXPIRES = 10
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=30)
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(hours=1)
     CORS_ALLOW_CREDENTIALS = True
